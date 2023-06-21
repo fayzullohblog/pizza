@@ -17,7 +17,7 @@ class UserManager(BaseUserManager):
         new_user.save()
         return new_user
     
-    def create_superuser(self,email,password,username,**extra_fields):
+    def create_superuser(self,email,password,**extra_fields):
         extra_fields.setdefault('is_staff',True)
         extra_fields.setdefault('is_superuser',True)
         extra_fields.setdefault('is_active',True)
@@ -27,8 +27,8 @@ class UserManager(BaseUserManager):
         
         if extra_fields.get('is_superuser') is not True:
             raise ValueError(_('Superuser should have is_superuser as True'))
-        
-        if extra_fields.get('is_avtive') is not True:
+       
+        if extra_fields.get('is_active') is not True:
             raise ValueError(_('Superuser should have is_active as True'))
         
         return self.create_user(email,password,**extra_fields)

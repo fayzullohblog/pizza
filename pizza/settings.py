@@ -1,6 +1,5 @@
-
-from decouple import config
 from pathlib import Path
+from datetime import timedelta
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -10,10 +9,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = config('SECRET_KEY')
+# SECRET_KEY = config('SECRET_KEY')
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = config('DEBUG',cast=bool)
+# # SECURITY WARNING: don't run with debug turned on in production!
+# DEBUG = config('DEBUG',cast=bool)
+
+SECRET_KEY='12aae5b547b6f7a12a28649cac4eb69a9520a95b'
+DEBUG=True
 
 ALLOWED_HOSTS = []
 
@@ -32,7 +34,9 @@ INSTALLED_APPS = [
     'orders.apps.OrdersConfig',
 
     'rest_framework',
+    'rest_framework.authtoken',
     "phonenumber_field",
+    'djoser',
     
 ]
 
@@ -123,5 +127,12 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL='authentication.User'
 
 REST_FRAMEWORK={
-    'NON_FIELD_ERRORS_KEY':'ERORS'
+    'NON_FIELD_ERRORS_KEY':'ERORS',
+    'DEFAULT_AUTHENTICATION_CLASESS':['rest_framework_simplejwt.authentication.Jwtauthentication']
+}
+
+SIMPLE_JWT={
+    'AUTH_HEADER_TYPES':('BEARER',),
+    'ACCESS_TOKEN_LIFETIME':timedelta(days=1),
+    'REFESH_TOKEN_LIFETIME':timedelta(days=1),
 }
