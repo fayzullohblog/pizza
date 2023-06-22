@@ -16,9 +16,7 @@ class UserCreateGenericApiView(generics.GenericAPIView):
 
     def post(self,request):
         data=request.data
-        print('-----',data)
         serializer=self.serializer_class(data=data)
-        print('------',serializer.is_valid())
         if serializer.is_valid():
             serializer.save()
             return response.Response(data=serializer.data,status=status.HTTP_201_CREATED)

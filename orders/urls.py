@@ -1,6 +1,9 @@
 from django.urls import path 
-from .views import OrderGenericApiView
+from . import views
 
 urlpatterns = [
-    path('',OrderGenericApiView.as_view())
+    path('',views.OrderGenericApiView.as_view()),
+    path('create-list/',views.OrderCreateListGenericsApiView.as_view()),
+    
+
 ]
